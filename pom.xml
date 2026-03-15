@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.myorg.api</groupId>
+  <artifactId>angular-client-generator</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>angular-client-generator</name>
+  <url>http://maven.apache.org</url>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- Plugin repository to ensure OpenAPI Generator plugin can be found -->
+  <pluginRepositories>
+    <pluginRepository>
+      <id>openapi-generator-repo</id>
+      <url>https://repo.maven.apache.org/maven2/</url>
+    </pluginRepository>
+  </pluginRepositories>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>7.20.0</version>
+        <executions>
+          <execution>
+            <id>generate-angular-client</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>http://localhost:8180/v3/api-docs</inputSpec>
+              <generatorName>typescript-angular</generatorName>
+              <output>${project.basedir}/generated-client</output>
+              <modelPackage>models</modelPackage>
+              <apiPackage>services</apiPackage>
+              <additionalProperties>
+                <ngVersion>16</ngVersion>
+                <npmName>@myorg/football-api</npmName>
+                <supportsES6>true</supportsES6>
+              </additionalProperties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
