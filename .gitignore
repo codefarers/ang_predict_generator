@@ -10,6 +10,8 @@ target/
 # Logs
 *.log
 
+generated-client
+
 # Package files
 *.jar
 *.war
